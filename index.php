@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+$errorMessages = $_SESSION['errors'] ?? [];
+$successMessage = $_SESSION['success'] ?? '';
+$oldInput = $_SESSION['old_input'] ?? [];
+
+session_unset(); // Clear session after reading to avoid old messages
+?>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +40,22 @@
     <input type="password" name="password" placeholder="Enter password" required>
     <button type="submit" name="login">Register</button>
 </form>
+
+
+
+
+
+
+
+<form action="login.php" method="POST">
+    <input type="text" name="username" placeholder="Enter username" value="<?php echo htmlspecialchars($oldInput['username'] ?? '') ?>" required><br><br>
+    <input type="password" name="password" placeholder="Enter password" required><br><br>
+    <button type="submit" name="login">Login</button>
+</form>
+
+
+
+
 
 <form action="insert-pizza.php" method="POST">
     <input type="text" name="name" placeholder="Enter pizza name" required>
